@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jonas Sandbrink | AI Security & Biosecurity Researcher</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #222;
+            --secondary: #333;
+            --accent: #555;
+            --text: #333;
+            --text-light: #555;
+            --bg: #fff;
+            --white: #fff;
+            --border: #ddd;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+            line-height: 1.8;
+            color: var(--text);
+            background: var(--bg);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 64px;
+        }
+
+        .nav-name {
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            font-size: 1rem;
+            color: var(--primary);
+            letter-spacing: 0.01em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-family: 'Inter', sans-serif;
+            text-decoration: none;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            font-weight: 400;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 140px 0 80px;
+            background: var(--white);
+        }
+
+        .hero .container {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+        }
+
+        .hero-content {
+            flex: 1;
+        }
+
+        .profile-photo {
+            flex-shrink: 0;
+        }
+
+        .profile-photo img {
+            width: 200px;
+            height: auto;
+            object-fit: cover;
+            border: none;
+            box-shadow: none;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 12px;
+            letter-spacing: -0.01em;
+        }
+
+        .hero .title {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            font-weight: 400;
+            margin-bottom: 24px;
+            font-style: italic;
+        }
+
+        .hero .intro {
+            font-size: 1.05rem;
+            color: var(--text);
+            max-width: 550px;
+            line-height: 1.8;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 24px;
+            margin-top: 32px;
+        }
+
+        .social-links a {
+            font-family: 'Inter', sans-serif;
+            text-decoration: none;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            font-weight: 400;
+            transition: color 0.2s;
+            border-bottom: 1px solid transparent;
+        }
+
+        .social-links a:hover {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+
+        /* Sections */
+        section {
+            padding: 60px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        section:last-of-type {
+            border-bottom: none;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 32px;
+        }
+
+        /* Experience */
+        .experience-item {
+            margin-bottom: 40px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .experience-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .experience-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .experience-date {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        .experience-org {
+            font-size: 1rem;
+            color: var(--accent);
+            margin-bottom: 12px;
+        }
+
+        .experience-desc {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        .experience-desc ul {
+            margin-top: 12px;
+            padding-left: 20px;
+        }
+
+        .experience-desc li {
+            margin-bottom: 8px;
+        }
+
+        /* Education */
+        .education-item {
+            margin-bottom: 20px;
+        }
+
+        .education-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .education-degree {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 2px;
+        }
+
+        .education-school {
+            color: var(--text);
+            margin-bottom: 2px;
+        }
+
+        .education-date {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        /* Publications */
+        .publication-category-section {
+            margin-bottom: 40px;
+        }
+
+        .publication-category-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .publication-category {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--primary);
+            margin-bottom: 20px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .publication-item {
+            margin-bottom: 16px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .publication-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .publication-title {
+            font-weight: 400;
+            color: var(--primary);
+            margin-bottom: 6px;
+            font-size: 1rem;
+        }
+
+        .publication-title a {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .publication-title a:hover {
+            color: var(--accent);
+        }
+
+        .publication-meta {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        .publication-more {
+            display: none;
+            margin-top: 16px;
+        }
+
+        .publication-more.expanded {
+            display: block;
+        }
+
+        .show-more-btn {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-light);
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px 0;
+            margin-top: 12px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: color 0.2s;
+        }
+
+        .show-more-btn:hover {
+            color: var(--primary);
+        }
+
+        .show-more-btn .arrow {
+            transition: transform 0.2s;
+        }
+
+        .show-more-btn.expanded .arrow {
+            transform: rotate(180deg);
+        }
+
+        /* Fellowships */
+        .fellowship-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+        }
+
+        .fellowship-item {
+            padding: 20px;
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+        }
+
+        .fellowship-name {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 4px;
+        }
+
+        .fellowship-org {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        /* Contact */
+        .contact-grid {
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .contact-item h3 {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-light);
+            margin-bottom: 6px;
+            font-weight: 500;
+        }
+
+        .contact-item a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .contact-item a:hover {
+            border-bottom: 1px solid var(--primary);
+        }
+
+        /* Footer */
+        footer {
+            padding: 40px 0;
+            text-align: center;
+            color: var(--text-light);
+            font-size: 0.85rem;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero .container {
+                flex-direction: column-reverse;
+                text-align: center;
+                gap: 32px;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .profile-photo img {
+                width: 160px;
+                height: auto;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+
+            .contact-grid {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <span class="nav-name">Jonas Sandbrink</span>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#publications">Publications</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Jonas Sandbrink</h1>
+                <p class="title">Head of Strategic Awareness, UK AI Security Institute</p>
+                <p class="intro">
+                    Researcher and policy expert working at the intersection of artificial intelligence,
+                    biosecurity, and technology governance. Leading efforts to understand AI trajectories
+                    and inform government preparedness for emerging technologies.
+                </p>
+                <div class="social-links">
+                    <a href="https://twitter.com/JonasSandbrink" target="_blank">X (@JonasSandbrink)</a>
+                    <a href="https://scholar.google.com/citations?user=Jonas_Sandbrink" target="_blank">Google Scholar</a>
+                    <a href="https://www.linkedin.com/in/jonassandbrink/" target="_blank">LinkedIn</a>
+                </div>
+            </div>
+            <div class="profile-photo">
+                <img src="profile.jpg" alt="Jonas Sandbrink">
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">About</h2>
+            <p style="color: var(--text-light); max-width: 700px; font-size: 1.05rem; margin-bottom: 16px;">
+                Jonas Sandbrink leads work on strategic awareness at the UK AI Safety Institute, the government body that evaluates frontier AI systems. Previously, he founded and led AISI's chemical and biological evaluations team.
+            </p>
+            <p style="color: var(--text-light); max-width: 700px; font-size: 1.05rem; margin-bottom: 16px;">
+                Before joining AISI, he researched synthetic biology and AI biosecurity risks at the University of Oxford, and advised the UK Cabinet Office, Google DeepMind, and the Nuclear Threat Initiative on biosecurity.
+            </p>
+            <p style="color: var(--text-light); max-width: 700px; font-size: 1.05rem;">
+                Jonas holds a PhD from Oxford's Nuffield Department of Medicine, where his interdisciplinary work combined scientific risk assessment, policy analysis, and ethics to examine misuse risks from synthetic virology and AI.
+            </p>
+        </div>
+    </section>
+
+    <section id="publications">
+        <div class="container">
+            <h2 class="section-title">Publications</h2>
+
+            <!-- AI Trajectories & Evaluation -->
+            <div class="publication-category-section">
+                <p class="publication-category">AI Trajectories & Evaluation</p>
+
+                <div class="publication-item">
+                    <div class="publication-title"><a href="https://arxiv.org/abs/2306.13952" target="_blank">Artificial intelligence and biological misuse: Differentiating risks of language models and biological design tools</a></div>
+                    <div class="publication-meta">Sandbrink JB. ArXiv, 2023</div>
+                </div>
+
+                <div class="publication-item">
+                    <div class="publication-title"><a href="https://www.aisi.gov.uk/work/understanding-ai-trajectories" target="_blank">Understanding AI Trajectories: Mapping the Limitations of Current AI Systems</a></div>
+                    <div class="publication-meta">Heitmann M, Hinrichsen T, Africa D, Sandbrink J. AISI Report, 2025</div>
+                </div>
+
+                <div class="publication-item">
+                    <div class="publication-title"><a href="https://www.aisi.gov.uk/work/long-form-tasks" target="_blank">Long-Form Tasks: A Methodology for Evaluating Scientific Assistants</a></div>
+                    <div class="publication-meta">Pencharz J, Flesch T, Sandbrink J. AISI Blog, 2024</div>
+                </div>
+
+                <div class="publication-more" id="ai-risk-more">
+                    <div class="publication-item">
+                        <div class="publication-title"><a href="https://doi.org/10.1080/10736700.2024.2399308" target="_blank">How might large language models aid actors in reaching the competency threshold required to carry out a chemical attack?</a></div>
+                        <div class="publication-meta">Stendall RT, Martin FJO, Sandbrink JB. The Nonproliferation Review, 2024</div>
+                    </div>
+
+                    <div class="publication-item">
+                        <div class="publication-title"><a href="https://www.aisi.gov.uk/work/advanced-ai-evaluations-at-aisi-may-update" target="_blank">Advanced AI evaluations at AISI: May update</a></div>
+                        <div class="publication-meta">AI Security Institute Technical Staff. AISI Blog, 2024</div>
+                    </div>
+                </div>
+
+                <button class="show-more-btn" onclick="toggleMore('ai-risk-more', this)">
+                    <span class="btn-text">Show 2 more</span>
+                    <span class="arrow">&#9662;</span>
+                </button>
+            </div>
+
+            <!-- Biosecurity -->
+            <div class="publication-category-section">
+                <p class="publication-category">Biosecurity</p>
+
+                <div class="publication-item">
+                    <div class="publication-title"><a href="https://doi.org/10.1038/s41559-021-01394-3" target="_blank">Safety and security concerns regarding transmissible vaccines</a></div>
+                    <div class="publication-meta">Sandbrink JB, Watson MC, Hebbeler AM, Esvelt KM. Nature Ecology & Evolution, 2021</div>
+                </div>
+
+                <div class="publication-item">
+                    <div class="publication-title"><a href="https://doi.org/10.1038/s41434-021-00312-3" target="_blank">Insidious Insights: Implications of Viral Vector Engineering for Pathogen Enhancement</a></div>
+                    <div class="publication-meta">Sandbrink JB, Alley EC, Watson MC, Koblentz GD, Esvelt KM. Gene Therapy, 2023</div>
+                </div>
+
+                <div class="publication-item">
+                    <div class="publication-title"><a href="https://doi.org/10.1016/j.vaccine.2021.02.023" target="_blank">Biosecurity risks associated with vaccine platform technologies</a></div>
+                    <div class="publication-meta">Sandbrink JB, Koblentz GD. Vaccine, 2022</div>
+                </div>
+
+                <div class="publication-more" id="biosecurity-more">
+                    <div class="publication-item">
+                        <div class="publication-title"><a href="https://doi.org/10.1128/mBio.01864-21" target="_blank">Rapid Proliferation of Pandemic Research: Implications for Dual-Use Risks</a></div>
+                        <div class="publication-meta">Musunuri S, Monrad JT, Palmer MJ, Sandbrink JB, Koblentz GD. MBio, 2021</div>
+                    </div>
+
+                    <div class="publication-item">
+                        <div class="publication-title"><a href="https://doi.org/10.1089/hs.2022.0109" target="_blank">Beyond Biosecurity by Taxonomic Lists: Lessons, Challenges, and Opportunities</a></div>
+                        <div class="publication-meta">Millett P, et al. Health Security, 2022</div>
+                    </div>
+
+                    <div class="publication-item">
+                        <div class="publication-title"><a href="https://doi.org/10.2139/ssrn.4035760" target="_blank">Mitigating Biosecurity Challenges of Wildlife Virus Discovery and Characterisation</a></div>
+                        <div class="publication-meta">Sandbrink J, et al. SSRN, 2022</div>
+                    </div>
+
+                    <div class="publication-item">
+                        <div class="publication-title"><a href="https://doi.org/10.1038/s41596-021-00655-6" target="_blank">Protocols and risks: when less is more</a></div>
+                        <div class="publication-meta">Pannu J, et al. Nature Protocols, 2021</div>
+                    </div>
+
+                    <div class="publication-item">
+                        <div class="publication-title"><a href="https://doi.org/10.1038/s41541-021-00290-y" target="_blank">Promoting versatile vaccine development for emerging pandemics</a></div>
+                        <div class="publication-meta">Monrad JT, Sandbrink JB, Cherian NG. npj Vaccines, 2021</div>
+                    </div>
+
+                    <div class="publication-item">
+                        <div class="publication-title"><a href="https://doi.org/10.3389/fimmu.2020.608460" target="_blank">RNA Vaccines: A Suitable Platform for Tackling Emerging Pandemics?</a></div>
+                        <div class="publication-meta">Sandbrink JB, Shattock RJ. Frontiers in Immunology, 2020</div>
+                    </div>
+
+                    <div class="publication-item">
+                        <div class="publication-title">Pandemic Pathogens as Biological Weapons: Revisiting German Biodefense</div>
+                        <div class="publication-meta">Sandbrink JB, Schmitt J. 49security, 2023</div>
+                    </div>
+
+                    <div class="publication-item">
+                        <div class="publication-title">As self-spreading vaccine technology moves forward, dialogue on its risks should follow</div>
+                        <div class="publication-meta">Sandbrink JB. Bulletin of the Atomic Scientists, 2022</div>
+                    </div>
+                </div>
+
+                <button class="show-more-btn" onclick="toggleMore('biosecurity-more', this)">
+                    <span class="btn-text">Show 8 more</span>
+                    <span class="arrow">&#9662;</span>
+                </button>
+            </div>
+
+            <!-- Technology Governance -->
+            <div class="publication-category-section">
+                <p class="publication-category">Technology Governance</p>
+
+                <div class="publication-item">
+                    <div class="publication-title"><a href="https://doi.org/10.1371/journal.pbio.3001600" target="_blank">Open science practices and risks arising from misuse of biological research</a></div>
+                    <div class="publication-meta">Smith JA, Sandbrink JB. PLOS Biology, 2022</div>
+                </div>
+
+                <div class="publication-item">
+                    <div class="publication-title"><a href="https://doi.org/10.1093/scipol/scae043" target="_blank">Risk-sensitive innovation: leveraging interactions between technologies to navigate technology risks</a></div>
+                    <div class="publication-meta">Sandbrink JB, Hobbs H, Swett JL, Dafoe A, Sandberg A. Science and Public Policy, 2024</div>
+                </div>
+
+                <div class="publication-item">
+                    <div class="publication-title"><a href="https://doi.org/10.1609/aies.v7i1.31678" target="_blank">Responsible reporting for frontier AI development</a></div>
+                    <div class="publication-meta">Kolt N, et al. Proceedings of the AAAI/ACM Conference on AI, Ethics, and Society, 2024</div>
+                </div>
+
+                <div class="publication-more" id="governance-more">
+                    <div class="publication-item">
+                        <div class="publication-title"><a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4213670" target="_blank">Differential technology development: a responsible innovation principle for navigating technology risks</a></div>
+                        <div class="publication-meta">Sandbrink JB, et al. SSRN, 2022</div>
+                    </div>
+                </div>
+
+                <button class="show-more-btn" onclick="toggleMore('governance-more', this)">
+                    <span class="btn-text">Show 1 more</span>
+                    <span class="arrow">&#9662;</span>
+                </button>
+            </div>
+
+            <!-- Epidemiology -->
+            <div class="publication-category-section">
+                <p class="publication-category">Epidemiology</p>
+
+                <div class="publication-item">
+                    <div class="publication-title"><a href="https://doi.org/10.1073/pnas.2119266119" target="_blank">Mask wearing in community settings reduces SARS-CoV-2 transmission</a></div>
+                    <div class="publication-meta">Leech G, et al. PNAS, 2022</div>
+                </div>
+
+                <div class="publication-item">
+                    <div class="publication-title"><a href="https://doi.org/10.1038/s41597-022-01175-y" target="_blank">A dataset of non-pharmaceutical interventions on SARS-CoV-2 in Europe</a></div>
+                    <div class="publication-meta">Altman G, et al. Scientific Data, 2022</div>
+                </div>
+
+                <div class="publication-item">
+                    <div class="publication-title"><a href="https://doi.org/10.1038/s41467-021-26013-4" target="_blank">Understanding the effectiveness of government interventions against COVID-19 resurgence in Europe</a></div>
+                    <div class="publication-meta">Sharma M, et al. Nature Communications, 2021</div>
+                </div>
+
+                <div class="publication-more" id="epidemiology-more">
+                    <div class="publication-item">
+                        <div class="publication-title">How to minimize COVID's impacts once the federal emergency 'ends'</div>
+                        <div class="publication-meta">Sandbrink JB, Klotz L. Bulletin of the Atomic Scientists, 2023</div>
+                    </div>
+                </div>
+
+                <button class="show-more-btn" onclick="toggleMore('epidemiology-more', this)">
+                    <span class="btn-text">Show 1 more</span>
+                    <span class="arrow">&#9662;</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">Contact</h2>
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <h3>X</h3>
+                    <a href="https://twitter.com/JonasSandbrink" target="_blank">@JonasSandbrink</a>
+                </div>
+                <div class="contact-item">
+                    <h3>Location</h3>
+                    <span style="color: var(--text);">London, UK</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Jonas Sandbrink</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMore(id, btn) {
+            const section = document.getElementById(id);
+            const btnText = btn.querySelector('.btn-text');
+            const isExpanded = section.classList.contains('expanded');
+
+            if (isExpanded) {
+                section.classList.remove('expanded');
+                btn.classList.remove('expanded');
+                const count = section.querySelectorAll('.publication-item').length;
+                btnText.textContent = 'Show ' + count + ' more';
+            } else {
+                section.classList.add('expanded');
+                btn.classList.add('expanded');
+                btnText.textContent = 'Show less';
+            }
+        }
+    </script>
+</body>
+</html>
